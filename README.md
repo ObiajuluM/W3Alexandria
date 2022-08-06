@@ -27,7 +27,7 @@ All code instances are written in vyper and the first approach is currently live
 
 2. `Chapter Contract -> Book Contract -> Library Contract`
 
-3. `Offchain Storage -> Library Contract`
+3. `Offchain Storage [IPFS] -> Library Contract`
 
 
 #### 1. Book Contract -> Library Contract
@@ -41,16 +41,16 @@ All code instances are written in vyper and the first approach is currently live
 
    *Advantages:*
    
-        *1. The author is directly incentivized*
+        1. The author is directly incentivized
         
-        *2. This method provides distributed easily accessed and uncensorable data*
+        2. This method provides distributed easily accessed and uncensorable data
         
     
    *Disdavantages:*
    
-        *1. The contract will increase in size as the book increases which isnt good.*
+        1. The contract will increase in size as the book increases which isnt good.
         
-              *fixes: create multiple contracts per book*
+              fixes: create multiple contracts per book
               
 
    The -BC- contract contains the following data types:

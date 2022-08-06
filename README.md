@@ -39,13 +39,13 @@ All code instances are written in vyper and the first approach is currently live
 
    Ether can be deposited to the contract as it is labeled payable to incentivize the author. A log of all the funds deposited to the contract is kept for future refernce
 
-   *Advantages:
-        1. The author is directly incentivized
-        2. This method provides distributed easily accessed and uncensorable data
+   *Advantages:*
+        *1. The author is directly incentivized*
+        *2. This method provides distributed easily accessed and uncensorable data*
     
-   *Disdavantages:
-        1. The contract will increase in size as the book increases which isnt good.
-            fixes: create multiple contracts per book
+   *Disdavantages:*
+        *1. The contract will increase in size as the book increases which isnt good.*
+              *fixes: create multiple contracts per book*
 
     The -BC- contract contains the following data types:
         -Author-

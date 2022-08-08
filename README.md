@@ -19,7 +19,7 @@ Current metaverse is still under development and needs a functioning literary in
 I propose a unique mechanism of contracts that will emulate physical literary infrastructure on-chain and will be used to create an interconnected decentralized library of digital knowledge that can be accessed from the metaverse.
 
 ##### Technicals:
-Currently there are 3 approaches to this idea, the first which i am currently working on.
+Currently there are 3 approaches of using this idea to publish books, the first which i am currently working on.
 
 All code instances are written in vyper and the first approach is currently live on polygon testnet.
 
@@ -28,6 +28,11 @@ All code instances are written in vyper and the first approach is currently live
 2. `Chapter Contract -> Book Contract -> Library Contract`
 
 3. `Offchain Storage [IPFS] -> Library Contract`
+
+## Usages
+### Your are to understand that is a single approach to what is possible with this idea
+   #### * It can be modified to publish daily, weekly or monthly content such as blogposts, articles stories etc. (currently a work in progress)
+   #### * It can be used to publish uncensorable and unmodifiable literary works. (WIP)
 
 
 #### 1. Book Contract -> Library Contract
@@ -133,7 +138,7 @@ All code instances are written in vyper and the first approach is currently live
             bool
         Method to reomve an exsting chapter from the book HashMap
 
-        -withdraw-
+        -transfer-
         Type: method
         params
             _amount: uint256
@@ -153,4 +158,4 @@ All code instances are written in vyper and the first approach is currently live
 
 This is under development constructive critism is highly encouraged
 
-Find other approaches here
+Other approaches are under construction

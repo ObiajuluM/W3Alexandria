@@ -33,6 +33,7 @@ All code instances are written in vyper and the first approach is currently live
 ### Your are to understand that is a single approach to what is possible with this idea
    #### * It can be modified to publish daily, weekly or monthly content such as blogposts, articles stories etc. (currently a work in progress)
    #### * It can be used to publish uncensorable and unmodifiable literary works. (WIP)
+   #### * Directly incentivize the artist.
 
 
 #### 1. Book Contract -> Library Contract

@@ -1,162 +1,137 @@
 # Alexandria
 
-## Decentralized literary infrastructure for the distributed metaverse.
 
-A set of contract built to integrate literary infrastructure in the metaverse.
+#### A project to decentralize and distribute literary infrastructure.
 
-This set of contracts are built to emulate books and a library for storing literary data on-chain.
+Approaches found here can be directly integrated with the distributed metaverse.
 
-Written in vyper for low cost and security
+#### Project Alexandria will bring literary arts on-chain, make literary censorship impossible and directly reward the artist/ publisher.
 
+The set of contracts and code found here is a small piece of what can be made possible with this idea.
 
-Decentralized literary infrastructure for the distributed metaverse
+An on-chain book and library infrastructure.
 
-### Abstract:
-The Metaverse is an upcoming technology that requires infrastructure to be at the stages of web2.
+Other possibilities I am working on while improving the existing ones are:
+	1. Publication of daily, weekly, or monthly content such as blog posts, articles, stories, etc.
 
-Current metaverse is still under development and needs a functioning literary infrastructure to emulate the likes of wikipedia.
+Yes, all these are possible, plus the fact that literary works published in this manner can be unmodifiable and are by default uncensorable with the aid of properly written smart contracts; this can also be used to directly incentivize the publisher/ artist.
 
-I propose a unique mechanism of contracts that will emulate physical literary infrastructure on-chain and will be used to create an interconnected decentralized library of digital knowledge that can be accessed from the metaverse.
+I am currently working on 3 approaches to the managing of books and library infrastructure
+1 and 2 are currently available on this SDK.
 
-##### Technicals:
-Currently there are 3 approaches of using this idea to publish books, the first which i am currently working on.
+	1. Off-chain Storage [IPFS] -> Library Contract
 
-All code instances are written in vyper and the first approach is currently live on polygon testnet.
+	2. Book Contract -> Library Contract
 
-1. `Book Contract -> Library Contract`
-
-2. `Chapter Contract -> Book Contract -> Library Contract`
-
-3. `Offchain Storage [IPFS] -> Library Contract`
-
-## Usages
-### Your are to understand that is a single approach to what is possible with this idea
-   #### * It can be modified to publish daily, weekly or monthly content such as blogposts, articles stories etc. (currently a work in progress)
-   #### * It can be used to publish uncensorable and unmodifiable literary works. (WIP)
-   #### * Directly incentivize the artist.
+	3. Chapter Contract -> Book Contract -> Library Contract
 
 
-#### 1. Book Contract -> Library Contract
-   This approach involves a contract A and contract B that will be refernced from now on as Book Contract -BC- and Library Contract -LC- respectively.
+The Library contract is constant so I defined it first, you can reference it as you read through other sections.
+A reference to all book contracts is stored in the library contract.
 
-   The book contract is used to store chapters represented as structs in a Book hashmap of `uint256 -> chapter`.
+#### The Library Contract -LC- 
+This will be deployed by the librarian, As the name implies it is a contract that stores information and a reference to a book.
+The library name and a quote are set upon deployment.
+A Library `hashmap` for storing a struct of books `Library: public(HashMap[uint256, Book])` the book struct is made up of:
 
-   The contract can only be modified by the author defined upon deployment. Modification in the sense of adding, removing chapters and funds transfer.
-
-   Ether can be deposited to the contract as it is labeled payable to incentivize the author. A log of all the funds deposited to the contract is kept for future refernce
-
-   *Advantages:*
+	`ispresent: bool` - to check if the book is present in the library
    
-        1. The author is directly incentivized
-        
-        2. This method provides distributed easily accessed and uncensorable data
-        
-    
-   *Disdavantages:*
+	`title: string` - the title of the book
    
-        1. The contract will increase in size as the book increases which isnt good.
-        
-              fixes: create multiple contracts per book
-              
-
-   The -BC- contract contains the following data types:
+	`bookaddr: uint256` - the address of the book
    
+	`author: address` - the author of the book
    
-        -Author-
-        Type: public(address)
-        The writer of the book
+An all-time value counter that stores the total amount of ether deposited to the contract and a quote about Alexandria
 
-        -Title-
-        Type: public(String[256])
-        The title of the book
+Events: `AddedBook`, `RemovedBook`, `Deposit`, `Transfer` - emit logs as the name implies.
 
-        -License-
-        Type: public(String[256])
-        Licensing rights of the book
+Built-in Methods
 
-        -Chapters-
-        Type: public(uint256)
-        Number of chapters in the book
+`addbook`: to add a new book struct to the library `hashmap`.
 
-        -Book-
-        Type: public(HashMap[uint256, Chapter])
-        Hashmap of uint256 and chapter struct that represents a book
+`removebook`: to delete a book struct from the library `hashmap`.
 
-        -AllTimeValue-
-        Type: public(uint256)
-        Sum of all ether sent to this contract
+`transfer`: to transfer out ether from the library contract.
 
-        -Chapter-
-        Type: struct
-            ispresent: bool
-            name: String[256]
-            chapterid: uint256
-            content: String[1000000] *can be modified
-        Chapter struct
+`balanceof`: to get the balance of the library contract.
 
-        -AddedChapter-
-        Type: event
-            Author: indexed(address)
-            Chapter_id: indexed(uint256)
-            Name: String[256]
-        Event fired upon chapter addition 
-
-        -RemovedChapter-
-        Type: event
-            Author: indexed(address)
-            Chapter_id: indexed(uint256)
-            Name: String[256]
-        Event fired upon chapter removal 
-
-        -Deposit-
-        Type: event
-            sender: indexed(address)
-            amount: indexed(uint256)
-        Event fired upon deposit
-
-        -Withdrawal-
-        Type: event
-            sender: indexed(address)
-            receiver: indexed(address)
-            amount: indexed(uint256)
-        Event fired upon withdrawal
-
-        -addchapter-
-        Type: method
-        params
-            _chapter: uint256
-            _name: String[256]
-            _content: String[1000000]
-        returns
-            bool
-        Method to create a new chapter and add it to the book HashMap
-
-        -removechapter-
-        Type: method
-        params
-            _chapter: uint256
-        returns
-            bool
-        Method to reomve an exsting chapter from the book HashMap
-
-        -transfer-
-        Type: method
-        params
-            _amount: uint256
-            _to: address
-        returns
-
-        Method to withdraw ether from the contract
-
-        -balanceof-
-        Type: method
-        params
-
-        returns
-            uint256
-        Method to return the balance of the book contract
+`transferposition`: to transfer the position of librarian 
 
 
-This is under development constructive critism is highly encouraged
+private methods
 
-Other approaches are under construction
+`gettitle`: to get the title of the book.
+
+`getauthor`: to get the author of the book.
+
+----------------------------------------------------------------------------
+
+#### 1. Off-chain Storage [IPFS] -> Library Contract
+
+As the name implies an off-chain storage such as ipfs is used to store the content of the book and the reference hash is stored in the book contract which will be referred to as -BC-.
+
+A book is uploaded to ipfs and the hash, author, title, license, and book format e.g .pdf, .epub is stored in the book contract.
+An all-time value to log the total amount of ether deposited to the contract.
+
+The author, title, license, ipfshash, and book format are defined upon contract creation.
+The Book Contract -BC- will be deployed by the author of the book
+
+All information stored in the contract will be used to build the book from the ipfs hash.
+
+Events: `Deposit`, `Transfer` - emit logs as the name implies.
+
+
+Built-in Methods
+
+`transfer`: to transfer out ether from the book contract.
+
+`balanceof`: to get the balance of the book contract.
+
+
+-----------------------------------------------------------------------
+
+
+#### 2. Book Contract -> Library Contract
+
+As the name implies there is a book contract and a library contract which we will refer to as BC and LC respectively from now on.
+
+The Book Contract -BC- will be deployed by the author of the book, the title, and the license set at that point.
+It contains a count of all chapters in the book that is increased by +1 every time a new chapter is added and vice versa.
+A book `hashmap` for storing a `struct` of chapters `Book: public(HashMap[uint256, Chapter])`.
+
+The chapter struct is made up of:
+
+	`ispresent: bool - to check if the chapter is present in the book
+   
+	`name: string` - the name of the chapter
+   
+	`chapterid: uint256` - the chapter id
+   
+	'content: String[1_000_000]` - the content of the chapter (scale to fit work)
+   
+An all-time value counter that stores the total amount of ether deposited to the contract.
+
+Events: `AddedChapter`, `RemovedChapter`, `Deposit`, `Transfer` - emit logs as the name implies.
+
+
+Built-in Methods
+
+`addchapter`: to add a new chapter struct to the book `hashmap`.
+
+`removechapter`: to delete a chapter struct from the book `hashmap`.
+
+`transfer`: to transfer out ether from the book contract.
+
+`balanceof`: to get the balance of the book contract.
+
+
+-----------------------------------------------------------------------
+
+
+#### 3. Chapter Contract -> Book Contract -> Library Contract
+
+This approach has not yet been implemented in this version of the project.
+It greatly copies the functionality of the above approach but each chapter is a different contract, their respective addresses are stored in the book contract.
+
+Currently working on this 

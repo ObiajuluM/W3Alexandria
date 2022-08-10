@@ -35,13 +35,13 @@ This will be deployed by the librarian, As the name implies it is a contract tha
 The library name and a quote are set upon deployment.
 A Library `hashmap` for storing a struct of books `Library: public(HashMap[uint256, Book])` the book struct is made up of:
 
-	`ispresent: bool` - to check if the book is present in the library
+	ispresent: bool - to check if the book is present in the library
    
-	`title: string` - the title of the book
+	title: string - the title of the book
    
-	`bookaddr: uint256` - the address of the book
+	bookaddr: uint256 - the address of the book
    
-	`author: address` - the author of the book
+	author: address - the author of the book
    
 An all-time value counter that stores the total amount of ether deposited to the contract and a quote about Alexandria
 

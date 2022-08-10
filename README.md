@@ -7,11 +7,12 @@ Approaches found here can be directly integrated with the metaverse or any exist
 
 #### Project Alexandria will bring literary arts on-chain, make literary censorship impossible and directly reward the artist/ publisher.
 
-The set of contracts and code found here is a small piece of what can be made possible with this idea.
+##### The set of contracts and code found here is a small piece of what can be made possible with this idea.
 
-An on-chain book and library infrastructure.
+##### An on-chain book and library infrastructure.
 
 Other possibilities I am working on while improving the existing ones are:
+
 	1. Publication of daily, weekly, or monthly content such as blog posts, articles, stories, etc.
 
 Yes, all these are possible, plus the fact that literary works published in this manner can be unmodifiable and are by default uncensorable with the aid of properly written smart contracts; this can also be used to directly incentivize the publisher/ artist.

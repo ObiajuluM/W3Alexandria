@@ -3,7 +3,7 @@
 
 #### A project to decentralize and distribute literary infrastructure.
 
-Approaches found here can be directly integrated with the distributed metaverse.
+Approaches found here can be directly integrated with the metaverse or any existing dapp.
 
 #### Project Alexandria will bring literary arts on-chain, make literary censorship impossible and directly reward the artist/ publisher.
 

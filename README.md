@@ -5,7 +5,7 @@
 
 Approaches found here can be directly integrated with the metaverse or any existing dapp.
 
-#### Project Alexandria will bring literary arts on-chain, make literary censorship impossible and directly reward the artist/ publisher.
+#### Project Alexandria will bring literary arts on-chain, make literary censorship impossible, directly reward the artist/ publisher, allow the first on-chain tokenization of literary art works
 
 ##### The set of contracts and code found here is a small piece of what can be made possible with this idea.
 

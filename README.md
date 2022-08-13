@@ -1,138 +1,214 @@
+
 # Alexandria
 
+A project to decentralize and distribute literary infrastructure.
 
-#### A project to decentralize and distribute literary infrastructure.
-
-Approaches found here can be directly integrated with the metaverse or any existing dapp.
-
-#### Project Alexandria will bring literary arts on-chain, make literary censorship impossible, directly reward the artist/ publisher, allow the first on-chain tokenization of literary art works
-
-##### The set of contracts and code found here is a small piece of what can be made possible with this idea.
-
-##### An on-chain book and library infrastructure.
-
-Other possibilities I am working on while improving the existing ones are:
-
-	1. Publication of daily, weekly, or monthly content such as blog posts, articles, stories, etc.
-
-Yes, all these are possible, plus the fact that literary works published in this manner can be unmodifiable and are by default uncensorable with the aid of properly written smart contracts; this can also be used to directly incentivize the publisher/ artist.
-
-I am currently working on 3 approaches to the managing of books and library infrastructure
-1 and 2 are currently available on this SDK.
-
-	1. Off-chain Storage [IPFS] -> Library Contract
-
-	2. Book Contract -> Library Contract
-
-	3. Chapter Contract -> Book Contract -> Library Contract
+See [github](https://github.com/ObiajuluM/Alexandria#alexandria) for a detailed breakdown.
 
 
-The Library contract is constant so I defined it first, you can reference it as you read through other sections.
-A reference to all book contracts is stored in the library contract.
 
-#### The Library Contract -LC- 
-This will be deployed by the librarian, As the name implies it is a contract that stores information and a reference to a book.
-The library name and a quote are set upon deployment.
-A Library `hashmap` for storing a struct of books `Library: public(HashMap[uint256, Book])` the book struct is made up of:
 
-	ispresent: bool - to check if the book is present in the library
+
+## Usage/Examples
+
+```python
+import W3Alexandria # import the package
+import ipfshttpclient # for connecting to ipfs
+
+
+# url to connect to 
+NETWORK = "https://rpc-mumbai.maticvigil.com/"
+NETWORK = "https://eth.bd.evmos.dev:8545
+# currently supports Polygon, Binance Smart Chain, Evmos, etc.
+
+
+# create an instance of the objects
+contract_book = W3Alexandria.Book(NETWORK) # instance of the contract book
+
+ipfs_book = W3Alexandria.BookIPFS(NETWORK) # instance of the ipfs book
+
+library = W3Alexandria.Library(NETWORK) # instance of library
+
+mnemonic = "your mnemonic here"
+
+# ALWAYS LOAD_DATA(), before you begine working with the contract
+contract_book.load_data()
+ipfs_book.load_data()
+library.load_data()
+
+
+# Load the addresses of already deployed contracts
+contract_book_address = "0xAD94E1Fd0158C64981D29B03eE0C4C350C5b0B69"
+ipfs_book_address = "0x98126F0d49e3137355B71f708Bb564ff9f224ED7"
+library_address = "0x80303A8EBF84aeDf25c75ea5e2C474b4aE6dFe3A"
+
+# generate new contracts and return their addresses
+
+# generate a new book contract
+print(contract_book.new_book("Rich Dad", "MIT", mnemonic).contractAddress)
+
+# generate a new ipfs contract book, this method deploys the book directly to ipfs before contract deployment
+print(ipfs_book.new_ipfs_book("Rich Dad", "MIT", "rich_dad.pdf", "pdf", client, mnemonic).contractAddress)
+
+# generate a new library contract
+print(library.new_library("Library of Alexandria", mnemonic).contractAddress)
+```
+
+All the available methods
+
+
+`W3Alexandria.Book`
+
+``` python 
+Method: deposit_ether_to_contract()
+Doc: Deposit ether to the contract
+
+Method: get_all_time_value()
+Doc: return book all time value
+
+Method: get_author()
+Doc: return book author
+
+Method: get_book_balance()
+Doc: return book balance
+
+Method: get_book_license()
+Doc: return book book_license
+
+Method: get_chapter_content()
+Doc: return book chapter content
+
+Method: get_chapter_name()
+Doc: return book chapter name
+
+Method: get_chapter_status()
+Doc: return book chapter status
+
+Method: get_chapters_count()
+Doc: return book chapters count
+
+Method: get_title()
+Doc: return book title
+
+Method: load_data()
+Doc: load neccessary data to work with the object
+
+Method: new_book()
+Doc: create new book
+
+Method: new_chapter()
+Doc: create new chapter
+
+Method: remove_chapter()
+Doc: remove chapter
+
+Method: transfer_ether_from_book_contract()
+Doc: transfer ether from contract
+```
+
    
-	title: string - the title of the book
-   
-	bookaddr: uint256 - the address of the book
-   
-	author: address - the author of the book
-   
-An all-time value counter that stores the total amount of ether deposited to the contract and a quote about Alexandria
 
-Events: `AddedBook`, `RemovedBook`, `Deposit`, `Transfer` - emit logs as the name implies.
+`W3Alexandria.BookIPFS`
+``` python 
+Method: deposit_ether_to_contract()
+Doc: Deposit ether to the contract
 
-Built-in Methods
+Method: get_all_time_value()
+Doc: return book all time value
 
-`addbook`: to add a new book struct to the library `hashmap`.
+Method: get_author()
+Doc: return book author
 
-`removebook`: to delete a book struct from the library `hashmap`.
+Method: get_book_format()
+Doc: return book format as deployed to ipfs, used to build the book from the hash
 
-`transfer`: to transfer out ether from the library contract.
+Method: get_book_license()
+Doc: return book book_license
 
-`balanceof`: to get the balance of the library contract.
+Method: get_ipfs_book_balance()
+Doc: return book balance
 
-`transferposition`: to transfer the position of librarian 
+Method: get_ipfs_hash()
+Doc: return book ipfs hash
+
+Method: get_title()
+Doc: return book title
+
+Method: load_data()
+Doc: load neccessary data to work with the object
+
+Method: new_ipfs_book()
+Doc: create new ipfs book this is also upload the book to ipfs
+
+Method: resolve_book_from_ipfs()
+Doc: return the book from ipfs
+
+Method: transfer_ether_from_book_contract()
+Doc: transfer ether from contract
+
+Method: upload_to_ipfs()
+Doc: upload book to ipfs
+
+```
+
+`W3Alexandria.Library`
+
+``` python
+Method: add_book()
+Doc: add book to library
+
+Method: deposit_ether_to_contract()
+Doc: Deposit ether to the contract
+
+Method: get_all_time_value()
+Doc: return library all time value
+
+Method: get_book_address()
+Doc: return book address
+
+Method: get_book_author()
+Doc: return book author
+
+Method: get_book_count()
+Doc: return book count
+
+Method: get_book_status()
+Doc: return book status
+
+Method: get_book_title()
+Doc: return book title
+
+Method: get_librarian()
+Doc: return library librarian
+
+Method: get_library_balance()
+Doc: get library balance
+
+Method: get_library_name()
+Doc: return library name
+
+Method: get_quote()
+Doc: return library quote
+
+Method: load_data()
+Doc: load neccessary data to work with the object
+
+Method: new_library()
+Doc: create new library
+
+Method: remove_book()
+Doc: remove book from library
+
+Method: transfer_ether_from_library_contract()
+Doc: transfer ether from library contract
+
+Method: transfer_position()
+Doc: transfer librarian position
+
+```
 
 
-private methods
+## License
 
-`gettitle`: to get the title of the book.
+[MIT](https://choosealicense.com/licenses/mit/)
 
-`getauthor`: to get the author of the book.
-
-----------------------------------------------------------------------------
-
-#### 1. Off-chain Storage [IPFS] -> Library Contract
-
-As the name implies an off-chain storage such as ipfs is used to store the content of the book and the reference hash is stored in the book contract which will be referred to as -BC-.
-
-A book is uploaded to ipfs and the hash, author, title, license, and book format e.g .pdf, .epub is stored in the book contract.
-An all-time value to log the total amount of ether deposited to the contract.
-
-The author, title, license, ipfshash, and book format are defined upon contract creation.
-The Book Contract -BC- will be deployed by the author of the book
-
-All information stored in the contract will be used to build the book from the ipfs hash.
-
-Events: `Deposit`, `Transfer` - emit logs as the name implies.
-
-
-Built-in Methods
-
-`transfer`: to transfer out ether from the book contract.
-
-`balanceof`: to get the balance of the book contract.
-
-
------------------------------------------------------------------------
-
-
-#### 2. Book Contract -> Library Contract
-
-As the name implies there is a book contract and a library contract which we will refer to as BC and LC respectively from now on.
-
-The Book Contract -BC- will be deployed by the author of the book, the title, and the license set at that point.
-It contains a count of all chapters in the book that is increased by +1 every time a new chapter is added and vice versa.
-A book `hashmap` for storing a `struct` of chapters `Book: public(HashMap[uint256, Chapter])`.
-
-The chapter struct is made up of:
-
-	`ispresent: bool - to check if the chapter is present in the book
-   
-	`name: string` - the name of the chapter
-   
-	`chapterid: uint256` - the chapter id
-   
-	'content: String[1_000_000]` - the content of the chapter (scale to fit work)
-   
-An all-time value counter that stores the total amount of ether deposited to the contract.
-
-Events: `AddedChapter`, `RemovedChapter`, `Deposit`, `Transfer` - emit logs as the name implies.
-
-
-Built-in Methods
-
-`addchapter`: to add a new chapter struct to the book `hashmap`.
-
-`removechapter`: to delete a chapter struct from the book `hashmap`.
-
-`transfer`: to transfer out ether from the book contract.
-
-`balanceof`: to get the balance of the book contract.
-
-
------------------------------------------------------------------------
-
-
-#### 3. Chapter Contract -> Book Contract -> Library Contract
-
-This approach has not yet been implemented in this version of the project.
-It greatly copies the functionality of the above approach but each chapter is a different contract, their respective addresses are stored in the book contract.
-
-Currently working on this 

@@ -42,6 +42,8 @@ contract_book_address = "0xAD94E1Fd0158C64981D29B03eE0C4C350C5b0B69"
 ipfs_book_address = "0x98126F0d49e3137355B71f708Bb564ff9f224ED7"
 library_address = "0x80303A8EBF84aeDf25c75ea5e2C474b4aE6dFe3A"
 
+# OR
+
 # generate new contracts and return their addresses
 
 # generate a new book contract

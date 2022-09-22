@@ -17,9 +17,8 @@ import ipfshttpclient # for connecting to ipfs
 
 
 # url to connect to 
-NETWORK = "https://rpc-mumbai.maticvigil.com/"
-NETWORK = "https://eth.bd.evmos.dev:8545
-# currently supports Polygon, Binance Smart Chain, Evmos, etc.
+NETWORK = "https://rpc.api.moonbase.moonbeam.network/"
+# currently supports Moonbeam Alpha TestnetPolygon, Binance Smart Chain, Evmos, etc.
 
 
 # create an instance of the objects
